@@ -311,13 +311,11 @@ ion-toolbar.toolbar-with-plane {
   align-items: center;
   justify-content: center;
 
-  /* 👇 POSITION (move button up) */
   transform: translateY(-35px);
 
-  /* 👇 SMOOTH ANIMATION */
+
   transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
 
-  /* HOVER */
   &:hover {
     transform: translateY(-35px) scale(1.04);
     box-shadow: 0 18px 34px rgba(184, 156, 133, 0.28);
@@ -328,7 +326,6 @@ ion-toolbar.toolbar-with-plane {
     );
   }
 
-  /* CLICK (PRESS EFFECT) */
   &:active {
     transform: translateY(-35px) scale(0.95);
     box-shadow: 0 8px 16px rgba(184, 156, 133, 0.18);
