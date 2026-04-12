@@ -1,156 +1,404 @@
-$primary: #ef3f5a;
-$accent: #fff5f7;
-$shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+$primary: #b89c85;
+$primary-deep: #a88a72;
+$primary-soft: #d5c3b4;
+$accent: #f7f1eb;
+
+$bg-top: #fffefe;
+$bg-bottom: #f8f4ef;
+
+$surface: rgba(255, 255, 255, 0.72);
+$surface-strong: rgba(255, 255, 255, 0.86);
+$surface-elevated: rgba(255, 255, 255, 0.92);
+
+$border-soft: rgba(255, 255, 255, 0.72);
+$border-accent: rgba(184, 156, 133, 0.12);
+
+$text-dark: #1a1a1a;
+$text-muted: #7a7a7a;
+$text-soft: #9a938d;
+
+$shadow-xs: 0 4px 12px rgba(17, 17, 17, 0.04);
+$shadow-sm: 0 10px 24px rgba(17, 17, 17, 0.05);
+$shadow-md: 0 16px 40px rgba(17, 17, 17, 0.08);
+$shadow-lg: 0 22px 50px rgba(17, 17, 17, 0.1);
+$shadow-fab: 0 18px 38px rgba(184, 156, 133, 0.24);
+
+$radius-sm: 16px;
+$radius-md: 20px;
+$radius-lg: 24px;
+$radius-xl: 30px;
+$radius-pill: 999px;
+
+$transition: all 0.28s cubic-bezier(0.22, 1, 0.36, 1);
 
 ion-content.no-scroll {
   --overflow: hidden;
-  background: #fff;
-  contain: layout size style;
+  --background: transparent;
+  background:
+    radial-gradient(circle at 0% 0%, rgba(184, 156, 133, 0.09), transparent 24%),
+    radial-gradient(circle at 100% 0%, rgba(184, 156, 133, 0.05), transparent 18%),
+    linear-gradient(180deg, $bg-top 0%, $bg-bottom 100%);
   position: relative;
+  contain: layout size style;
 }
 
-// Google Map Styling
+/* subtle ambient glow */
+ion-content.no-scroll::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 50% 15%, rgba(255, 255, 255, 0.35), transparent 30%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* MAP */
 .styled-map {
-  height: 70vh;
+  position: relative;
+  z-index: 1;
+  height: 71vh;
   width: 100%;
-  border-radius: 16px;
-  box-shadow: $shadow;
-  overflow: hidden;
-  margin: 1rem auto;
   max-width: 92%;
+  margin: 1rem auto 1.3rem auto;
+  overflow: hidden;
+  border-radius: $radius-xl;
+  background: $surface-strong;
+  border: 1px solid $border-soft;
+  box-shadow: $shadow-lg;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 
-// Search Form
+/* optional premium top sheen */
+.styled-map::after {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 90px;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.22) 0%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* SEARCH */
 .location-search-form {
+  position: relative;
+  z-index: 3;
   padding: 0 16px;
   margin: 0 auto 1rem auto;
   max-width: 92%;
-
-  .search-bar-container {
-    display: flex;
-    align-items: center;
-    background: rgba(255, 255, 255, 0.7);
-    border-radius: 999px;
-    box-shadow: $shadow;
-    padding: 10px 16px;
-    gap: 10px;
-    backdrop-filter: blur(6px);
-
-    .search-icon {
-      color: #e6dac8;
-      font-size: 20px;
-    }
-
-    .search-input {
-      flex: 1;
-      font-size: 1rem;
-      border: none;
-      background: transparent;
-      outline: none;
-      color: #333;
-
-      &::placeholder {
-        color: #999;
-      }
-    }
-
-    .search-button {
-      background: #e6dac8;
-      color: white;
-      font-size: 0.9rem;
-      border: none;
-      padding: 8px 14px;
-      border-radius: 999px;
-      cursor: pointer;
-      font-weight: 600;
-      transition: background-color 0.2s ease;
-
-      &:hover {
-        background-color: darken(#cbb9a4c9, 5%);
-      }
-    }
-  }
 }
 
-// Floating Add Button
-.add-fab {
-  bottom: 28px;
-  right: 24px;
-  z-index: 1000;
-
-  ion-fab-button {
-    --background: linear-gradient(135deg, #cbb9a4c9, #e6dac8);
-    --border-radius: 50%;
-    --box-shadow: 0 12px 30px #faf1ea, 0 4px 12px #e6dac8;
-    width: 44px;
-    height: 44px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: none;
-    backdrop-filter: blur(6px);
-    transition: all 0.25s ease-in-out;
-    animation: pulseGlow 2.5s ease-in-out infinite;
-
-    &:hover {
-      transform: scale(1.08);
-      --box-shadow: 0 16px 34px #faf1ea, 0 4px 12px #e6dac8;;
-    }
-
-    &:active {
-      transform: scale(0.96);
-      --box-shadow: 0 8px 18px #faf1ea, 0 4px 12px #e6dac8;
-    }
-
-    ion-icon {
-      font-size: 28px;
-      color: white;
-    }
-  }
-}
-
-// Subtle floating pulse
-@keyframes pulseGlow {
-  0% {
-    box-shadow: 0 0 0 0 #e6dac8, 0 4px 12px #e6dac8;
-  }
-  70% {
-    box-shadow: 0 0 0 10px rgba(239, 63, 90, 0);
-  }
-  100% {
-    box-shadow: 0 0 0 0 rgba(239, 63, 90, 0);
-  }
-}
-
-
-
-
-
-
-// Back Button Bar
-.back-button-bar {
-  background-color: #ff5f7e;
-  padding: 10px 16px;
-  height: 50px;
+.search-bar-container {
   display: flex;
   align-items: center;
-  border-radius: 0 0 12px 12px;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
-  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 16px;
+  border-radius: $radius-pill;
+  background: $surface;
+  border: 1px solid rgba(255, 255, 255, 0.82);
+  box-shadow: $shadow-md;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  transition: $transition;
+  position: relative;
+}
 
-  .back-title {
-    color: white;
-    font-size: 1rem;
-    font-weight: 500;
-    margin-left: 8px;
+.search-bar-container::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.18) 0%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  pointer-events: none;
+}
+
+.search-bar-container:focus-within {
+  transform: translateY(-1px);
+  border: 1px solid rgba(184, 156, 133, 0.18);
+  box-shadow:
+    0 16px 34px rgba(17, 17, 17, 0.08),
+    0 0 0 4px rgba(184, 156, 133, 0.08);
+}
+
+.search-icon {
+  color: $primary;
+  font-size: 19px;
+  opacity: 0.95;
+  flex-shrink: 0;
+}
+
+.search-input {
+  flex: 1;
+  min-width: 0;
+  border: none;
+  background: transparent;
+  outline: none;
+  font-size: 0.98rem;
+  font-weight: 500;
+  color: $text-dark;
+  letter-spacing: -0.01em;
+}
+
+.search-input::placeholder {
+  color: $text-soft;
+}
+
+.search-button {
+  flex-shrink: 0;
+  border: none;
+  cursor: pointer;
+  border-radius: $radius-pill;
+  padding: 9px 15px;
+  font-size: 0.84rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  color: white;
+  background: linear-gradient(
+    135deg,
+    lighten($primary, 7%) 0%,
+    $primary 100%
+  );
+  box-shadow: 0 10px 20px rgba(184, 156, 133, 0.18);
+  transition: $transition;
+}
+
+.search-button:hover {
+  transform: translateY(-1px);
+  background: linear-gradient(
+    135deg,
+    lighten($primary, 9%) 0%,
+    $primary-deep 100%
+  );
+  box-shadow: 0 14px 26px rgba(184, 156, 133, 0.22);
+}
+
+.search-button:active {
+  transform: scale(0.98);
+}
+
+/* FAB */
+.add-fab {
+  bottom: 26px;
+  right: 22px;
+  z-index: 10;
+}
+
+.add-fab ion-fab-button {
+  --background: transparent;
+  --border-radius: 50%;
+  --box-shadow: none;
+
+  width: 58px;
+  height: 58px;
+  border: none;
+  border-radius: 50%;
+  background: linear-gradient(
+    135deg,
+    lighten($primary, 8%) 0%,
+    $primary 100%
+  );
+  box-shadow: $shadow-fab;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: transform 0.22s ease, box-shadow 0.22s ease, background 0.22s ease;
+  animation: pulseGlow 2.8s ease-in-out infinite;
+  position: relative;
+  overflow: hidden;
+}
+
+.add-fab ion-fab-button::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.22) 0%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  pointer-events: none;
+}
+
+.add-fab ion-fab-button:hover {
+  transform: translateY(-1px) scale(1.06);
+  box-shadow: 0 22px 40px rgba(184, 156, 133, 0.28);
+  background: linear-gradient(
+    135deg,
+    lighten($primary, 10%) 0%,
+    lighten($primary, 1%) 100%
+  );
+}
+
+.add-fab ion-fab-button:active {
+  transform: scale(0.95);
+  box-shadow: 0 10px 18px rgba(184, 156, 133, 0.16);
+}
+
+.add-fab ion-fab-button ion-icon {
+  font-size: 24px;
+  color: white;
+}
+
+/* FAB pulse */
+@keyframes pulseGlow {
+  0% {
+    box-shadow:
+      0 0 0 0 rgba(184, 156, 133, 0.16),
+      0 10px 22px rgba(184, 156, 133, 0.16);
+  }
+  70% {
+    box-shadow:
+      0 0 0 12px rgba(184, 156, 133, 0),
+      0 10px 22px rgba(184, 156, 133, 0.16);
+  }
+  100% {
+    box-shadow:
+      0 0 0 0 rgba(184, 156, 133, 0),
+      0 10px 22px rgba(184, 156, 133, 0.16);
   }
 }
 
-// Google Autocomplete Dropdown
+/* BACK BAR */
+.back-button-bar {
+  height: 58px;
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 0 0 $radius-md $radius-md;
+  background: linear-gradient(
+    135deg,
+    rgba(207, 188, 171, 0.95) 0%,
+    rgba(184, 156, 133, 0.92) 100%
+  );
+  box-shadow: 0 12px 24px rgba(184, 156, 133, 0.14);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.28);
+  position: relative;
+  overflow: hidden;
+}
+
+.back-button-bar::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.14) 0%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  pointer-events: none;
+}
+
+.back-button-bar .back-title {
+  color: white;
+  font-size: 0.98rem;
+  font-weight: 600;
+  margin-left: 8px;
+  letter-spacing: -0.01em;
+}
+
+/* GOOGLE AUTOCOMPLETE */
 .pac-container {
   z-index: 9999 !important;
   max-height: 250px !important;
   overflow-y: auto !important;
-  border-radius: 10px;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
+  margin-top: 8px !important;
+  border-radius: $radius-md !important;
+  box-shadow: 0 18px 34px rgba(17, 17, 17, 0.1) !important;
+  border: 1px solid $border-accent !important;
+  background: rgba(255, 255, 255, 0.96) !important;
+  backdrop-filter: blur(14px) !important;
+  -webkit-backdrop-filter: blur(14px) !important;
+}
+
+.pac-item {
+  padding: 11px 14px !important;
+  font-size: 0.92rem !important;
+  color: $text-dark !important;
+  border-top: 1px solid rgba(184, 156, 133, 0.06) !important;
+}
+
+.pac-item:first-child {
+  border-top: none !important;
+}
+
+.pac-item:hover {
+  background: rgba(184, 156, 133, 0.07) !important;
+}
+
+/* tiny polish on scrollbars */
+.pac-container::-webkit-scrollbar {
+  width: 8px;
+}
+
+.pac-container::-webkit-scrollbar-thumb {
+  background: rgba(184, 156, 133, 0.24);
+  border-radius: 999px;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+  .styled-map {
+    height: 66vh;
+    max-width: 94%;
+    border-radius: 24px;
+    margin: 0.85rem auto 1rem auto;
+  }
+
+  .location-search-form {
+    padding: 0 12px;
+    max-width: 94%;
+  }
+
+  .search-bar-container {
+    padding: 11px 14px;
+    gap: 10px;
+  }
+
+  .search-input {
+    font-size: 0.94rem;
+  }
+
+  .search-button {
+    padding: 8px 13px;
+    font-size: 0.8rem;
+  }
+
+  .add-fab {
+    bottom: 22px;
+    right: 18px;
+  }
+
+  .add-fab ion-fab-button {
+    width: 54px;
+    height: 54px;
+  }
+
+  .add-fab ion-fab-button ion-icon {
+    font-size: 23px;
+  }
+
+  .back-button-bar {
+    height: 54px;
+    padding: 10px 14px;
+  }
+
+  .back-button-bar .back-title {
+    font-size: 0.94rem;
+  }
 }
