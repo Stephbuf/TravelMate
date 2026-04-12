@@ -1,0 +1,88 @@
+<ion-content [fullscreen]="true" class="login-content">
+
+  <!-- Background mockups (same as login) -->
+  <div class="travel-bg">
+    <div class="phone-mock mock-left"></div>
+    <div class="phone-mock mock-right"></div>
+  </div>
+
+  <div class="login-wrapper">
+    <div class="login-card">
+
+      <h2 class="login-title">Create Account</h2>
+      <p>Start planning your next trip ✈️</p>
+
+      <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+
+        <!-- First Name -->
+        <ion-item lines="none">
+          <ion-icon name="person-outline" slot="start"></ion-icon>
+          <ion-input type="text" placeholder="First Name" formControlName="firstName"></ion-input>
+        </ion-item>
+        <div *ngIf="firstName?.touched && firstName?.invalid" class="error-msg">
+          <small>First name is required.</small>
+        </div>
+
+        <!-- Last Name -->
+        <ion-item lines="none">
+          <ion-icon name="person-outline" slot="start"></ion-icon>
+          <ion-input type="text" placeholder="Last Name" formControlName="lastName"></ion-input>
+        </ion-item>
+        <div *ngIf="lastName?.touched && lastName?.invalid" class="error-msg">
+          <small>Last name is required.</small>
+        </div>
+
+        <!-- Email -->
+        <ion-item lines="none">
+          <ion-icon name="mail-outline" slot="start"></ion-icon>
+          <ion-input type="email" placeholder="Email" formControlName="email"></ion-input>
+        </ion-item>
+        <div *ngIf="email?.touched && email?.invalid" class="error-msg">
+          <small *ngIf="email?.errors?.['required']">Email is required.</small>
+          <small *ngIf="email?.errors?.['email']">Enter a valid email.</small>
+          <small *ngIf="email?.errors?.['emailTaken']">Email already in use.</small>
+        </div>
+
+        <!-- Password -->
+        <ion-item lines="none">
+          <ion-icon name="lock-closed-outline" slot="start"></ion-icon>
+          <ion-input
+            [type]="showPassword ? 'text' : 'password'"
+            placeholder="Password"
+            formControlName="password"
+          ></ion-input>
+          <ion-icon
+            slot="end"
+            [name]="showPassword ? 'eye-off-outline' : 'eye-outline'"
+            (click)="togglePasswordVisibility()"
+          ></ion-icon>
+        </ion-item>
+
+        <div *ngIf="password?.touched && password?.invalid" class="error-msg">
+          <small *ngIf="password?.errors?.['required']">Password is required.</small>
+          <small *ngIf="password?.errors?.['minlength']">Minimum 6 characters.</small>
+          <small *ngIf="password?.errors?.['pattern']">Must include 1 capital letter & 1 symbol.</small>
+        </div>
+
+        <!-- Messages -->
+        <p class="error-msg" *ngIf="errorMessage">{{ errorMessage }}</p>
+        <p class="success-msg" *ngIf="successMessage">{{ successMessage }}</p>
+
+        <!-- Submit -->
+        <ion-button
+          expand="block"
+          class="gradient-button"
+          type="submit"
+          [disabled]="signupForm.invalid"
+        >
+          Create Account
+        </ion-button>
+
+        
+
+      </form>
+
+    </div>
+  </div>
+
+</ion-content>

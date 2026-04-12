@@ -1,0 +1,47 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Map View</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- Map Display -->
+  <div id="map" class="half-map"></div>
+
+  <!-- Search Bar -->
+  <div class="searchbar-wrapper">
+    <form (ngSubmit)="filterLocations()" class="map-search-form">
+      <div class="search-bar-container">
+        <ion-icon name="search-outline" class="search-icon"></ion-icon>
+        <input
+         id="search-input-location"
+          type="text"
+          [(ngModel)]="searchTerm"
+          name="searchTerm"
+          placeholder="Search saved places"
+          class="search-input"
+          required
+        />
+        <button type="submit" class="search-button">Search</button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Filtered Locations List -->
+<div class="list-wrapper">
+  <ion-list class="styled-list">
+    <ion-item *ngFor="let location of filteredLocations" lines="none">
+      <ion-label>{{ location.name || location.location_name }}</ion-label>
+      <span class="plus-icon" (click)="toggleMarker(location)">+</span>
+    </ion-item>
+  </ion-list>
+</div>
+
+</ion-content>
+
+<!-- Back Button -->
+<div class="back-button-bar">
+  <ion-buttons slot="start">
+    <ion-back-button defaultHref="/tabs/tab2" style="color: white;"></ion-back-button>
+  </ion-buttons>
+</div>

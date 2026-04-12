@@ -1,0 +1,37 @@
+<ion-content class="no-scroll" scroll-y="false">
+
+  <!-- Google Map -->
+  <div id="map" class="styled-map"></div>
+
+  <!-- Search Form -->
+  <form (ngSubmit)="onSubmit()" class="location-search-form">
+    <div class="search-bar-container glassy">
+      <ion-icon name="search" class="search-icon"></ion-icon>
+      <input
+        id="search-input-location"
+        type="text"
+        [(ngModel)]="searchQuery"
+        name="searchQuery"
+        placeholder="Search for a place..."
+        class="search-input"
+        required
+      />
+      <button type="submit" class="search-button">Search</button>
+    </div>
+  </form>
+
+  <!-- Add Location FAB -->
+<ion-fab class="add-fab" slot="fixed">
+  <ion-fab-button (click)="goToAddLocation()" class="fab-glass">
+    <ion-icon name="add"></ion-icon>
+  </ion-fab-button>
+</ion-fab>
+
+
+</ion-content>
+
+<!-- Bottom Back Button -->
+<div class="back-button-bar">
+  <ion-buttons slot="start">
+    <ion-back-button defaultHref="/tabs/tab1" style="color: white;"></ion-back-button>
+  </ion-buttons>

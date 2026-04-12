@@ -1,0 +1,457 @@
+$desert-rock: #5c4430;
+$soft-sandstone: #a78f76;
+$creamed-oat: #E6DAC8;
+$porcelain-mist: #F4F1EA;
+$feather-white: #FAF9F6;
+$dusty-blue: #8d9fe3;
+$soft-blue: #dfe4fb;
+$travel-pink: #e98ac2;
+
+$bg: $feather-white;
+$text-main: $desert-rock;
+$text-subtle: darken($soft-sandstone, 20%);
+$card-bg: rgba(244, 241, 234, 0.92);
+$input-bg: rgba(255, 255, 252, 0.95);
+$input-border: #d5cabe;
+$btn-start: $soft-sandstone;
+$btn-end: $desert-rock;
+
+.login-content {
+  --background: linear-gradient(180deg, #dfe4fb 0%, #edf0fb 45%, #f7f4ef 100%);
+  height: 100vh;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  font-family: 'Helvetica Neue', sans-serif;
+  color: $text-main;
+}
+
+.travel-bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.login-content::before,
+.login-content::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(10px);
+  z-index: 0;
+  opacity: 0.55;
+}
+
+.login-content::before {
+  width: 260px;
+  height: 260px;
+  top: -80px;
+  left: -70px;
+  background: radial-gradient(circle, rgba(233, 138, 194, 0.24) 0%, transparent 70%);
+}
+
+.login-content::after {
+  width: 300px;
+  height: 300px;
+  bottom: -90px;
+  right: -100px;
+  background: radial-gradient(circle, rgba(167, 143, 118, 0.22) 0%, transparent 70%);
+}
+
+.phone-mock {
+  position: absolute;
+  width: 220px;
+  height: 430px;
+  border-radius: 42px;
+  background: rgba(255, 255, 255, 0.44);
+  border: 3px solid rgba(168, 173, 208, 0.45);
+  box-shadow: 0 18px 45px rgba(102, 110, 168, 0.12);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  z-index: 1;
+  transform: rotate(-8deg);
+}
+
+.mock-left {
+  top: 90px;
+  left: -35px;
+}
+
+.mock-right {
+  top: 70px;
+  right: -30px;
+  transform: rotate(8deg);
+}
+
+.mock-inner {
+  padding: 18px 16px;
+  height: 100%;
+  position: relative;
+}
+
+.mock-topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.mini-avatar,
+.mini-bell {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.85);
+}
+
+.mini-avatar {
+  background: linear-gradient(145deg, $dusty-blue, #ffffff);
+}
+
+.mini-search {
+  height: 38px;
+  margin-top: 16px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.72);
+}
+
+.mini-flight-row {
+  margin-top: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.mini-code-block {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+
+  small {
+    color: $text-subtle;
+    font-size: 0.75rem;
+  }
+}
+
+.align-right {
+  text-align: right;
+}
+
+.mini-code {
+  font-size: 2rem;
+  font-weight: 700;
+  color: $text-main;
+}
+
+.mini-flight-line {
+  position: relative;
+  width: 70px;
+  border-top: 2px dashed rgba(93, 109, 196, 0.45);
+}
+
+.mini-flight-circle {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: white;
+  border: 2px dashed $dusty-blue;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 0.8rem;
+  color: $dusty-blue;
+}
+
+.mini-card-list {
+  margin-top: 28px;
+  padding: 18px 14px;
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.72);
+}
+
+.mini-line {
+  height: 16px;
+  border-radius: 999px;
+  background: rgba(167, 143, 118, 0.18);
+  margin-bottom: 12px;
+
+  &.short {
+    width: 70%;
+  }
+}
+
+.map-style {
+  background:
+    linear-gradient(rgba(255,255,255,0.1), rgba(255,255,255,0.1)),
+    linear-gradient(90deg, transparent 24%, rgba(190, 196, 220, 0.45) 25%, transparent 26%),
+    linear-gradient(transparent 24%, rgba(190, 196, 220, 0.45) 25%, transparent 26%);
+  background-size: auto, 48px 48px, 48px 48px;
+  border-radius: 36px;
+}
+
+.mini-title {
+  margin-top: 10px;
+  font-size: 2rem;
+  line-height: 0.95;
+  color: #1f1f22;
+
+  strong {
+    display: inline-block;
+    margin-top: 4px;
+    background: $dusty-blue;
+    color: white;
+    padding: 2px 8px;
+    border-radius: 6px;
+  }
+}
+
+.mini-map-card {
+  width: 130px;
+  height: 125px;
+  border-radius: 22px;
+  background: linear-gradient(145deg, #82c2ff, #f7d3a3);
+  position: absolute;
+  left: 18px;
+  bottom: 72px;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
+}
+
+.mini-map-dot {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.92);
+  position: absolute;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.08);
+
+  &.one {
+    top: 108px;
+    right: 18px;
+  }
+
+  &.two {
+    top: 172px;
+    right: 58px;
+  }
+
+  &.three {
+    top: 238px;
+    right: 14px;
+  }
+}
+
+.login-wrapper {
+  width: 100%;
+  min-height: 100vh;
+  padding: 2rem 1.2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  z-index: 3;
+  box-sizing: border-box;
+}
+
+.login-card {
+  background: $card-bg;
+  border-radius: 30px;
+  width: 100%;
+  max-width: 430px;
+  padding: 2.6rem 2rem 2.1rem;
+  text-align: center;
+  box-shadow:
+    0 22px 50px rgba(120, 105, 92, 0.2),
+    0 4px 18px rgba(255, 255, 255, 0.35) inset;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.65);
+}
+
+.brand-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.45rem 1rem;
+  border-radius: 999px;
+  background: linear-gradient(135deg, rgba(141, 159, 227, 0.18), rgba(233, 138, 194, 0.18));
+  color: $text-main;
+  font-size: 0.88rem;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  margin-bottom: 1rem;
+}
+
+.login-card h2 {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: $text-main;
+  margin-bottom: 0.65rem;
+  letter-spacing: -0.5px;
+}
+
+.login-card p {
+  font-size: 1rem;
+  color: $text-subtle;
+  margin-bottom: 2rem;
+  line-height: 1.5;
+}
+
+ion-item {
+  --padding-start: 0.85rem;
+  --inner-padding-end: 0.85rem;
+  --background: $input-bg;
+  --border-radius: 18px;
+  --min-height: 56px;
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid $input-border;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  box-shadow: 0 6px 16px rgba(92, 68, 48, 0.05);
+}
+
+ion-input {
+  width: 100%;
+  padding: 0.9rem 0.35rem;
+  font-size: 1rem;
+  color: $text-main;
+  box-sizing: border-box;
+
+  &::placeholder {
+    color: darken($text-subtle, 10%);
+    opacity: 1;
+  }
+}
+
+ion-icon {
+  color: $text-main;
+  font-size: 1.15rem;
+  cursor: pointer;
+}
+
+.error-msg small {
+  color: #b00020;
+  font-size: 0.8rem;
+  display: block;
+  text-align: left;
+  margin-top: -0.45rem;
+  margin-bottom: 0.85rem;
+  padding-left: 0.2rem;
+}
+
+.gradient-button {
+  --background: transparent !important;
+  --color: $text-main !important;
+  --border-radius: 16px;
+
+  border: none !important;
+  box-shadow: none !important;
+
+  font-weight: 600;
+  font-size: 1rem;
+  padding: 0.9rem;
+  margin-top: 0.8rem;
+  text-transform: none;
+  letter-spacing: 0.3px;
+}
+.forgot-password,
+.signup-text {
+  font-size: 0.92rem;
+  color: $text-main;
+}
+
+.forgot-password {
+  margin-top: 1.2rem;
+}
+
+.signup-text {
+  margin-top: 1.25rem;
+}
+
+.signup-text a,
+.forgot-password a {
+  font-weight: 600;
+  color: $dusty-blue;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .phone-mock {
+    opacity: 0.4;
+    transform: scale(0.9);
+  }
+
+  .mock-left {
+    left: -70px;
+    top: 120px;
+  }
+
+  .mock-right {
+    right: -70px;
+    top: 90px;
+  }
+
+  .login-card {
+    max-width: 92%;
+    padding: 2.2rem 1.5rem 2rem;
+    border-radius: 24px;
+  }
+
+  .login-card h2 {
+    font-size: 1.8rem;
+  }
+
+  .login-card p {
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .login-wrapper {
+    padding: 1rem;
+  }
+
+  .phone-mock {
+    opacity: 0.22;
+    transform: scale(0.78);
+  }
+
+  .mock-left {
+    left: -92px;
+    top: 115px;
+  }
+
+  .mock-right {
+    right: -95px;
+    top: 70px;
+  }
+
+  .login-card {
+    max-width: 100%;
+    padding: 2rem 1rem 1.8rem;
+    border-radius: 22px;
+  }
+
+  .login-card h2 {
+    font-size: 1.65rem;
+  }
+
+  .brand-pill {
+    font-size: 0.82rem;
+  }
+
+  ion-item {
+    --min-height: 52px;
+  }
+
+  .gradient-button {
+    font-size: 0.95rem;
+  }
+}

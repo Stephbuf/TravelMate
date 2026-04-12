@@ -1,0 +1,59 @@
+<ion-content [fullscreen]="true" class="login-content">
+
+  <div class="login-wrapper">
+    <div class="login-card">
+      <h2>Welcome To Travel Mate</h2>
+      <p>Enter your details below to login</p>
+
+      <form [formGroup]="loginForm" (ngSubmit)="login()">
+        <ion-item lines="none">
+          <ion-input type="email" placeholder="Enter email" formControlName="email"></ion-input>
+        </ion-item>
+        <div *ngIf="email?.touched && email?.invalid" class="error-msg">
+          <small *ngIf="email?.errors?.['required']">Email is required.</small>
+          <small *ngIf="email?.errors?.['email']">Enter a valid email.</small>
+        </div>
+
+        <ion-item lines="none">
+          <ion-input
+            [type]="showPassword ? 'text' : 'password'"
+            placeholder="Enter password"
+            formControlName="password"
+          ></ion-input>
+          <ion-icon
+            slot="end"
+            [name]="showPassword ? 'eye-off-outline' : 'eye-outline'"
+            (click)="togglePasswordVisibility()"
+          ></ion-icon>
+        </ion-item>
+        <div *ngIf="password?.touched && password?.invalid" class="error-msg">
+          <small *ngIf="password?.errors?.['required']">Password is required.</small>
+          <small *ngIf="password?.errors?.['minlength']">Minimum 6 characters.</small>
+          <small *ngIf="password?.errors?.['pattern']">Must include 1 capital letter & 1 symbol.</small>
+        </div>
+
+        <ion-button
+          expand="block"
+          class="gradient-button"
+          type="submit"
+          [disabled]="loginForm.invalid"
+        >
+          Sign in
+        </ion-button>
+      </form>
+
+      <div class="forgot-password">
+        <a href="#">Forgot your password?</a>
+      </div>
+
+      <br />
+      <div class="login-header-row">
+        <span class="signup-text">
+          Don’t have an account?
+          <a (click)="goToSignup()">Get Started</a>
+        </span>
+      </div>
+    </div>
+  </div>
+
+</ion-content>

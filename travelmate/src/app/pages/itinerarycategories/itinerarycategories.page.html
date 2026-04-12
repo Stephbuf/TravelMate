@@ -1,0 +1,55 @@
+<ion-content class="itinerary-categories-content">
+  <div class="beautiful-header">
+    <h1>{{ city }}</h1>
+  </div>
+
+  <div class="wrapper">
+    <div class="timeline-track">
+      <div class="carousel">
+        <ng-container *ngFor="let category of categories">
+          <div class="timeline-wrapper">
+            <div class="timeline-dot"></div>
+
+            <div class="carousel__item">
+              <div class="carousel__item-head">
+                {{ getCategoryEmoji(category.name) }}
+              </div>
+
+              <div class="carousel__item-body">
+                <ion-item button (click)="toggleCategory(category.name)" class="category-toggle">
+                  <ion-label class="category-name title">{{ category.name }}</ion-label>
+                  <ion-icon
+                    slot="end"
+                    class="chevron-icon"
+                    [name]="expandedCategory === category.name ? 'chevron-up' : 'chevron-down'">
+                  </ion-icon>
+                </ion-item>
+
+                <ng-container *ngIf="expandedCategory === category.name">
+                  <ion-item-sliding *ngFor="let place of category.places">
+                    <ion-item class="place-item" button detail="false" (click)="goToMap(place)">
+                      <ion-label class="place-label">
+                        {{ place.name || place.location_name || getLabelFromAddress(place.address) }}
+                      </ion-label>
+                    </ion-item>
+                    <ion-item-options side="end">
+                      <ion-item-option size="small" color="warning" (click)="editPlace(place)">Edit</ion-item-option>
+                      <ion-item-option size="small" color="danger" (click)="deletePlace(place)">Delete</ion-item-option>
+                    </ion-item-options>
+                  </ion-item-sliding>
+                </ng-container>
+
+              </div>
+            </div>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</ion-content>
+
+<div class="back-button-bar">
+  <ion-buttons slot="start">
+    <ion-back-button defaultHref="/tabs/tab2"></ion-back-button>
+  </ion-buttons>
+</div>

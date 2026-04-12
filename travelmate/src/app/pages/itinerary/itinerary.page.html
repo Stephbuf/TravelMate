@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>My Itinerary</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <!-- Location Details -->
+  <div *ngIf="selectedLocation">
+    <h2>{{ selectedLocation.name }}</h2>
+    <p>
+      {{ selectedLocation.city }}<br />
+      {{ selectedLocation.address }}<br />
+      Category: {{ selectedLocation.category }}
+    </p>
+  </div>
+
+  <!-- Map -->
+  <div id="map" style="height: 400px; width: 100%; margin-top: 1rem;"></div>
+
+  <!-- No location  -->
+  <ion-text *ngIf="!selectedLocation" color="medium">
+    <p class="ion-padding">No location selected to display on the map.</p>
+  </ion-text>
+
+</ion-content>

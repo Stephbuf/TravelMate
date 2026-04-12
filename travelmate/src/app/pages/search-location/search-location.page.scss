@@ -1,0 +1,156 @@
+$primary: #ef3f5a;
+$accent: #fff5f7;
+$shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+
+ion-content.no-scroll {
+  --overflow: hidden;
+  background: #fff;
+  contain: layout size style;
+  position: relative;
+}
+
+// Google Map Styling
+.styled-map {
+  height: 70vh;
+  width: 100%;
+  border-radius: 16px;
+  box-shadow: $shadow;
+  overflow: hidden;
+  margin: 1rem auto;
+  max-width: 92%;
+}
+
+// Search Form
+.location-search-form {
+  padding: 0 16px;
+  margin: 0 auto 1rem auto;
+  max-width: 92%;
+
+  .search-bar-container {
+    display: flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 999px;
+    box-shadow: $shadow;
+    padding: 10px 16px;
+    gap: 10px;
+    backdrop-filter: blur(6px);
+
+    .search-icon {
+      color: #e6dac8;
+      font-size: 20px;
+    }
+
+    .search-input {
+      flex: 1;
+      font-size: 1rem;
+      border: none;
+      background: transparent;
+      outline: none;
+      color: #333;
+
+      &::placeholder {
+        color: #999;
+      }
+    }
+
+    .search-button {
+      background: #e6dac8;
+      color: white;
+      font-size: 0.9rem;
+      border: none;
+      padding: 8px 14px;
+      border-radius: 999px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: background-color 0.2s ease;
+
+      &:hover {
+        background-color: darken(#cbb9a4c9, 5%);
+      }
+    }
+  }
+}
+
+// Floating Add Button
+.add-fab {
+  bottom: 28px;
+  right: 24px;
+  z-index: 1000;
+
+  ion-fab-button {
+    --background: linear-gradient(135deg, #cbb9a4c9, #e6dac8);
+    --border-radius: 50%;
+    --box-shadow: 0 12px 30px #faf1ea, 0 4px 12px #e6dac8;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    backdrop-filter: blur(6px);
+    transition: all 0.25s ease-in-out;
+    animation: pulseGlow 2.5s ease-in-out infinite;
+
+    &:hover {
+      transform: scale(1.08);
+      --box-shadow: 0 16px 34px #faf1ea, 0 4px 12px #e6dac8;;
+    }
+
+    &:active {
+      transform: scale(0.96);
+      --box-shadow: 0 8px 18px #faf1ea, 0 4px 12px #e6dac8;
+    }
+
+    ion-icon {
+      font-size: 28px;
+      color: white;
+    }
+  }
+}
+
+// Subtle floating pulse
+@keyframes pulseGlow {
+  0% {
+    box-shadow: 0 0 0 0 #e6dac8, 0 4px 12px #e6dac8;
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(239, 63, 90, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(239, 63, 90, 0);
+  }
+}
+
+
+
+
+
+
+// Back Button Bar
+.back-button-bar {
+  background-color: #ff5f7e;
+  padding: 10px 16px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  border-radius: 0 0 12px 12px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  justify-content: space-between;
+
+  .back-title {
+    color: white;
+    font-size: 1rem;
+    font-weight: 500;
+    margin-left: 8px;
+  }
+}
+
+// Google Autocomplete Dropdown
+.pac-container {
+  z-index: 9999 !important;
+  max-height: 250px !important;
+  overflow-y: auto !important;
+  border-radius: 10px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
+}

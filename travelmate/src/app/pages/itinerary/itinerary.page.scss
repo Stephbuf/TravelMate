@@ -1,0 +1,56 @@
+ul.mtree {
+  list-style: none;
+  padding-left: 1rem;
+  font-family: 'Helvetica Neue', sans-serif;
+  opacity: 1;
+
+  li {
+    list-style: none;
+    margin: 0.25rem 0;
+
+    > a {
+      display: block;
+      font-weight: bold;
+      text-decoration: none;
+      padding: 0.6rem 1rem;
+      border-radius: 8px;
+      background: #f3f3f3;
+      color: #333;
+      cursor: pointer;
+      transition: background 0.3s ease;
+
+      &:hover {
+        background: #ffe6f0;
+      }
+    }
+
+    &.mtree-node > a::after {
+      content: '▸';
+      float: right;
+      transition: transform 0.3s ease;
+    }
+
+    &.mtree-open > a::after {
+      transform: rotate(90deg);
+    }
+
+    ul {
+      margin-top: 0.25rem;
+      margin-left: 1rem;
+      padding-left: 0.75rem;
+      border-left: 2px solid #ffd6dc;
+
+      li > a {
+        font-weight: normal;
+        background: #fff0f5;
+        padding: 0.5rem 1rem;
+        border-radius: 6px;
+        margin-bottom: 0.25rem;
+
+        &:hover {
+          background: #ffcce0;
+        }
+      }
+    }
+  }
+}

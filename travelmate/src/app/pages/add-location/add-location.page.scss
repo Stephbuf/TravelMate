@@ -1,0 +1,138 @@
+$form-radius: 16px;
+$form-padding: 24px;
+$form-background: #ffffffd9;
+$accent-color: #ef3f5a;
+$input-border: 1px solid #ddd;
+$shadow-md: 0 4px 16px rgba(0, 0, 0, 0.08);
+$shadow-lg: 0 8px 28px rgba(0, 0, 0, 0.12);
+
+.form-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem 1rem;
+  min-height: 100vh;
+  background: linear-gradient(to bottom right, #f9f9f9, #ffffff);
+  font-family: 'Segoe UI', sans-serif;
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: #f2f2f2;
+    z-index: -2;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    backdrop-filter: blur(8px);
+    z-index: -1;
+  }
+}
+
+.form-card {
+  width: 100%;
+  max-width: 500px;
+  background: $form-background;
+  border-radius: $form-radius;
+  padding: $form-padding;
+  box-shadow: $shadow-lg;
+  backdrop-filter: blur(10px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+
+  ion-card-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #a48d78;
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+
+  ion-item {
+    --background: transparent;
+    --padding-start: 0;
+    --inner-padding-end: 0;
+    border: $input-border;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    padding: 4px 8px;
+
+    ion-label {
+      font-size: 0.95rem;
+      color: #555;
+    }
+
+    ion-input,
+    ion-select {
+      font-size: 1rem;
+      color: #333;
+      --placeholder-color: #aaa;
+    }
+  }
+
+  ion-select.emoji-select {
+    max-height: 180px;
+    overflow-y: auto;
+    font-size: 1rem;
+  }
+
+  .submit-button-wrapper {
+    margin-top: auto;
+    padding-top: 1rem;
+  }
+
+  ion-button {
+    --background: $accent-color;
+    --background-hover: darken($accent-color, 10%);
+    color: white;
+    font-weight: 600;
+    border-radius: 999px;
+    height: 48px;
+    font-size: 1rem;
+    box-shadow: $shadow-md;
+    width: 100%;
+  }
+}
+
+.back-button-bar {
+  background-color:#ff5f7e;
+  padding: 0.75rem 1rem;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  border-radius: 0 0 12px 12px;
+
+  ion-back-button {
+    --color: white;
+    color: white;
+  }
+}
+.submit-button-wrapper {
+  margin-top: 2rem;
+  padding-bottom: 0.5rem;
+
+  ion-button {
+    --background: #a48d78;;
+    --background-hover: #e6dac8;
+    color: #fff;
+    font-weight: 600;
+    font-size: 1rem;
+    border-radius: 30px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    height: 48px;
+  }
+}
+
+ion-card-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}

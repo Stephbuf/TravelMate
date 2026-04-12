@@ -1,0 +1,171 @@
+<ion-app>
+  <!-- Side Menu -->
+  <ion-menu contentId="main-content">
+    <ion-header>
+      <ion-toolbar class="toolbar-with-plane">
+        <ion-title class="menu-title">Menu</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content class="ion-padding">
+      <ion-list lines="none">
+        <ion-item button detail="false" class="menu-item" (click)="goToSettings()">
+          <ion-icon slot="start" name="notifications-outline"></ion-icon>
+          <ion-label>Settings</ion-label>
+        </ion-item>
+
+        <ion-item button detail="false" class="menu-item" (click)="goToGeneral()">
+          <ion-icon slot="start" name="settings-outline"></ion-icon>
+          <ion-label>General</ion-label>
+        </ion-item>
+
+        <ion-item button detail="false" class="menu-item" (click)="logout()">
+          <ion-icon slot="start" name="log-out-outline"></ion-icon>
+          <ion-label>Logout</ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+
+  <!-- Main Page -->
+  <div class="ion-page" id="main-content">
+    <ion-header>
+      <ion-toolbar class="toolbar-with-plane" style="position: relative;">
+
+        <ion-menu-button autoHide="false" class="custom-menu-button" slot="start">
+          <div class="menu-button-content">
+            <span class="menu-icon">...</span>
+            <span class="menu-label" style="font-size: 12px;">Menu</span>
+          </div>
+        </ion-menu-button>
+
+        <div
+          style="
+            position: absolute;
+            top: 1rem;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #a48d78;
+          "
+        >
+          {{ currentFilter === 'wishlist' ? 'Wishlist Page' : 'Itinerary Page' }}
+        </div>
+      </ion-toolbar>
+    </ion-header>
+
+    <ion-content class="wishlist-content">
+      <section class="places">
+        <div class="places__filter">
+          <div class="toggle-switch">
+            <button
+              type="button"
+              class="toggle-option"
+              [class.active]="currentFilter === 'wishlist'"
+              (click)="setFilter('wishlist')">
+              Wishlist
+            </button>
+
+            <button
+              type="button"
+              class="toggle-option"
+              [class.active]="currentFilter === 'itinerary'"
+              (click)="setFilter('itinerary')">
+              Itinerary
+            </button>
+          </div>
+        </div>
+
+        <div class="empty-message" *ngIf="wishlistData.length === 0">
+          <ion-text color="medium">
+            <p class="ion-text-center">
+              You currently do not have a {{ currentFilter === 'wishlist' ? 'Wishlist' : 'Itinerary' }}
+            </p>
+          </ion-text>
+        </div>
+
+        <div class="box" *ngIf="wishlistData.length > 0">
+          <div class="cards is-active" #cardsContainer>
+            <div
+              class="card"
+              *ngFor="let group of wishlistData; let i = index"
+              [ngClass]="'card--' + (i + 1)"
+              [class.is-active]="expandedCountry === group.country">
+
+              <ion-item-sliding>
+                <ion-item button detail="false" (click)="toggleCountry(group.country)" class="country-header-item">
+                  <ion-label class="card__title">{{ group.country }}</ion-label>
+                </ion-item>
+
+                <ion-item-options side="end">
+                  <ion-item-option class="edit-option" (click)="editLocation(group.country, 'country')">
+                    <div class="option-content">
+                      <ion-icon name="create-outline"></ion-icon>
+                      <span>Edit</span>
+                    </div>
+                  </ion-item-option>
+
+                  <ion-item-option class="delete-option" (click)="deleteCountry(group.country)">
+                    <div class="option-content">
+                      <ion-icon name="trash-outline"></ion-icon>
+                      <span>Delete</span>
+                    </div>
+                  </ion-item-option>
+
+                  <ion-item-option class="move-option" (click)="moveCountry(group.country)">
+                    <div class="option-content">
+                      <ion-icon name="swap-horizontal-outline"></ion-icon>
+                      <span>{{ currentFilter === 'wishlist' ? 'Move to Itinerary' : 'Move to Wishlist' }}</span>
+                    </div>
+                  </ion-item-option>
+                </ion-item-options>
+              </ion-item-sliding>
+
+              <!-- Cities -->
+              <ng-container *ngIf="expandedCountry === group.country">
+                <ion-list class="city-list" *ngFor="let city of getUniqueCities(group.entries)">
+                  <ion-item-sliding>
+                    <ion-item lines="none" class="city-item" (click)="goToCityPage(city)">
+                      <ion-icon name="location-outline" slot="start" class="city-icon"></ion-icon>
+                      <ion-label>{{ city }}</ion-label>
+                    </ion-item>
+
+                    <ion-item-options side="end">
+                      <ion-item-option class="edit-option" (click)="editLocation(city, 'city')">
+                        <div class="option-content">
+                          <ion-icon name="create-outline"></ion-icon>
+                          <span>Edit</span>
+                        </div>
+                      </ion-item-option>
+
+                      <ion-item-option class="delete-option" (click)="deleteCity(city)">
+                        <div class="option-content">
+                          <ion-icon name="trash-outline"></ion-icon>
+                          <span>Delete</span>
+                        </div>
+                      </ion-item-option>
+
+                      <ion-item-option class="move-option" (click)="moveCountry(group.country)">
+                        <div class="option-content">
+                          <ion-icon name="swap-horizontal-outline"></ion-icon>
+                          <span>{{ currentFilter === 'wishlist' ? 'Move to Itinerary' : 'Move to Wishlist' }}</span>
+                        </div>
+                      </ion-item-option>
+                    </ion-item-options>
+                  </ion-item-sliding>
+                </ion-list>
+              </ng-container>
+
+            </div>
+          </div>
+
+          <div class="social-btns">
+            <button class="btn add-new" (click)="goToAddLocation()">
+              <i class="fa fa-plus"></i>
+            </button>
+          </div>
+        </div>
+      </section>
+    </ion-content>
+  </div>
+</ion-app>

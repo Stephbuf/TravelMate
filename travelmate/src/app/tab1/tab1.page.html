@@ -1,0 +1,33 @@
+<div class="bg-photo"></div>
+<div class="container">
+  
+  <div class="cover">
+    <br>
+    <br>
+    <br>
+<h2>
+  Discover what's out there 
+  <svg class="pin-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20">
+    <path fill="#cbb9a4" d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5S10.62 6.5 12 6.5s2.5 1.12 2.5 2.5S13.38 11.5 12 11.5z"/>
+  </svg>
+</h2>
+
+    <br />
+    <form class="flex-form" (submit)="onSubmit($event)" #searchForm="ngForm">
+      <label for="search-input">
+        <i class="ion-location"></i>
+      </label>
+     <input
+  type="text"
+  id="search-input-tab1"
+  #inputRef
+  name="searchQuery"
+  [(ngModel)]="searchQuery"
+  placeholder="Where do you want to go?"
+  required
+/>
+
+      <input type="submit" value="search" [disabled]="!searchForm.form.valid" />
+    </form>
+  </div>
+</div>

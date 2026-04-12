@@ -1,0 +1,97 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Explore</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="explore-page" fullscreen scroll-y="true">
+  <div class="content-container">
+    <h2>Where would you spend your holiday?</h2>
+
+    <!-- Search Section -->
+    <div class="search-section">
+      <div class="search-title">🔍 Search</div>
+
+      <!-- Search Friends -->
+      <ion-item lines="none">
+        <ion-icon name="person-outline" slot="start"></ion-icon>
+        <ion-input placeholder="Search friends..." clearInput></ion-input>
+      </ion-item>
+    </div>
+
+    <!-- Add Friend Section -->
+    <div class="add-friend-section">
+      <h3>Suggested Friends</h3>
+
+      <ion-item lines="none">
+        <ion-avatar slot="start">
+          <img src="assets/images/luna.jpg" />
+        </ion-avatar>
+        <ion-label>
+          <div class="name">Luna Buffotot</div>
+          <div class="tag">⭐ Super Explorer</div>
+        </ion-label>
+        <ion-button slot="end" fill="clear" size="small" color="danger">Add</ion-button>
+      </ion-item>
+
+      <ion-item lines="none">
+        <ion-avatar slot="start">
+          <img src="assets/images/whiskey.jpg" />
+        </ion-avatar>
+        <ion-label>
+          <div class="name">Whiskey Buffotot</div>
+          <div class="tag">🌍 30 shared locations</div>
+        </ion-label>
+        <ion-button slot="end" fill="clear" size="small" color="danger">Add</ion-button>
+      </ion-item>
+    </div>
+
+
+        <!-- Search Section -->
+    <div class="search-section">
+      <div class="search-title">🔍 Search</div>
+
+      <!-- Search Places -->
+      <ion-item lines="none">
+        <ion-icon name="location-outline" slot="start"></ion-icon>
+        <ion-input placeholder="Search places..." clearInput></ion-input>
+      </ion-item>
+    </div>
+    <!--  Category Icons -->
+    <div class="category-icons">
+      <div class="category-icon">✈️</div>
+      <div class="category-icon">🚗</div>
+      <div class="category-icon">🏨</div>
+      <div class="category-icon">🍽️</div>
+      <div class="category-icon">🎭</div>
+    </div>
+
+    <!-- Top Destinations -->
+    <div class="section">
+      <div class="section-heading">
+        <div>Top Destinations</div>
+        <span>See All</span>
+      </div>
+
+      <div class="horizontal-scroll">
+        <div class="location-card">
+          <img class="card-image" src="assets/images/santorini.jpg" />
+          <div class="card-body">
+            <h3>Santorini</h3>
+            <div class="meta">Greece</div>
+            <div class="subtext">89 activities · Best prices</div>
+          </div>
+        </div>
+
+        <div class="location-card">
+          <img class="card-image" src="assets/images/paris.webp" />
+          <div class="card-body">
+            <h3>Paris</h3>
+            <div class="meta">France</div>
+            <div class="subtext">97 activities · Travel deals</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>

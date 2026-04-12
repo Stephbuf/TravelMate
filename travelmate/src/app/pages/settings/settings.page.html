@@ -1,0 +1,54 @@
+<ion-content class="settings-content">
+  <div class="settings-header">
+    <h2>Settings</h2>
+  </div>
+
+  <div class="settings-group">
+    <h3 class="group-title">General</h3>
+
+    <ion-item class="settings-item">
+      <ion-label>Dark Mode</ion-label>
+      <ion-toggle [(ngModel)]="settings.darkMode"  class="custom-toggle" (ionChange)="toggleDarkMode()"></ion-toggle>
+    </ion-item>
+
+    <ion-item class="settings-item" button (click)="navigateToProfile()">
+      <ion-label>Profile</ion-label>
+      <ion-icon name="person-outline" slot="end"></ion-icon>
+    </ion-item>
+  </div>
+
+  <div class="settings-group">
+    <h3 class="group-title">Preferences</h3>
+
+    <ion-item class="settings-item">
+      <ion-label>Notifications</ion-label>
+      <ion-toggle [(ngModel)]="settings.notificationsEnabled"  class="custom-toggle"></ion-toggle>
+    </ion-item>
+
+    <ion-item class="settings-item">
+      <ion-label>Location Access</ion-label>
+      <ion-toggle [(ngModel)]="settings.locationAccess"  class="custom-toggle"></ion-toggle>
+    </ion-item>
+  </div>
+
+  <div class="settings-group">
+    <h3 class="group-title">Support</h3>
+
+    <ion-item class="settings-item" button (click)="contactSupport()">
+      <ion-label>Contact Support</ion-label>
+      <ion-icon name="chatbubble-ellipses-outline" slot="end"></ion-icon>
+    </ion-item>
+
+    <ion-item class="settings-item" button (click)="logout()">
+      <ion-label class="logout-text">Log Out</ion-label>
+      <ion-icon name="log-out-outline" slot="end"></ion-icon>
+    </ion-item>
+  </div>
+
+
+</ion-content>
+  <div class="back-button-bar">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/tab2"></ion-back-button>
+    </ion-buttons>
+  </div>

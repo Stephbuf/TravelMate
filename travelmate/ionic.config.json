@@ -1,0 +1,7 @@
+{
+  "name": "travelmate",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
