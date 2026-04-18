@@ -17,19 +17,45 @@
             <ion-input formControlName="city" required></ion-input>
           </ion-item>
 
-          <ion-item lines="none" class="highlight-select">
+          <ion-item lines="none" class="highlight-select custom-select-row">
             <ion-label>Category</ion-label>
-            <ion-select 
-              formControlName="category" 
-              interface="popover" 
-              placeholder="Select Category"
-              class="emoji-select"
+
+            <button
+              type="button"
+              class="fake-select-button"
+              id="category-popover-trigger"
+              aria-label="Open category options"
             >
-              <ion-select-option *ngFor="let cat of categoryKeys()" [value]="cat">
-                {{ categories[cat] }} {{ cat }}
-              </ion-select-option>
-            </ion-select>
+              <span class="fake-select-text" [class.placeholder]="!getSelectedCategoryLabel()">
+                {{ getSelectedCategoryLabel() || 'Select Category' }}
+              </span>
+              <ion-icon name="chevron-down-outline"></ion-icon>
+            </button>
           </ion-item>
+
+          <ion-popover
+            trigger="category-popover-trigger"
+            triggerAction="click"
+            side="bottom"
+            alignment="center"
+            dismissOnSelect="true"
+            class="action-popover select-like-popover"
+          >
+            <ng-template>
+              <ion-content>
+                <ion-list lines="none">
+                  <ion-item
+                    button
+                    detail="false"
+                    *ngFor="let cat of categoryKeys()"
+                    (click)="selectCategory(cat)"
+                  >
+                    <ion-label>{{ categories[cat] }} {{ cat }}</ion-label>
+                  </ion-item>
+                </ion-list>
+              </ion-content>
+            </ng-template>
+          </ion-popover>
 
           <ion-item lines="full">
             <ion-label position="floating">Name of Location</ion-label>
@@ -40,32 +66,59 @@
             <ion-label position="floating">Address</ion-label>
             <ion-input formControlName="address" required></ion-input>
           </ion-item>
-<ion-item lines="none" class="highlight-select">
-  <ion-label>Tag</ion-label>
-  <ion-select 
-    formControlName="tag" 
-    interface="popover" 
-    placeholder="Select Tag"
-    class="emoji-select"
-  >
-    <ion-select-option value="wishlist">📌 Wishlist</ion-select-option>
-    <ion-select-option value="itinerary">🗺️ Itinerary</ion-select-option>
-  </ion-select>
-</ion-item>
 
-        <div class="submit-button-wrapper">
-  <ion-button expand="block" type="submit" [disabled]="locationForm.invalid || isSubmitting">
-    Save Location
-  </ion-button>
-</div>
+          <ion-item lines="none" class="highlight-select custom-select-row">
+            <ion-label>Tag</ion-label>
+
+            <button
+              type="button"
+              class="fake-select-button"
+              id="tag-popover-trigger"
+              aria-label="Open tag options"
+            >
+              <span class="fake-select-text" [class.placeholder]="!getSelectedTagLabel()">
+                {{ getSelectedTagLabel() || 'Select Tag' }}
+              </span>
+              <ion-icon name="chevron-down-outline"></ion-icon>
+            </button>
+          </ion-item>
+
+          <ion-popover
+            trigger="tag-popover-trigger"
+            triggerAction="click"
+            side="bottom"
+            alignment="center"
+            dismissOnSelect="true"
+            class="action-popover select-like-popover"
+          >
+            <ng-template>
+              <ion-content>
+                <ion-list lines="none">
+                  <ion-item button detail="false" (click)="selectTag('wishlist')">
+                    <ion-label>📌 Wishlist</ion-label>
+                  </ion-item>
+
+                  <ion-item button detail="false" (click)="selectTag('itinerary')">
+                    <ion-label>🗺️ Itinerary</ion-label>
+                  </ion-item>
+                </ion-list>
+              </ion-content>
+            </ng-template>
+          </ion-popover>
+
+          <div class="submit-button-wrapper">
+            <ion-button expand="block" type="submit" [disabled]="locationForm.invalid || isSubmitting">
+              Save Location
+            </ion-button>
+          </div>
         </form>
       </ion-card-content>
-    </ion-card>
-  </div>
 
-  <div class="back-button-bar">
-    <ion-buttons slot="start">
-      <ion-back-button defaultHref="/search-location" style="color: white;"></ion-back-button>
-    </ion-buttons>
+      <div class="back-button-bar">
+        <ion-buttons>
+          <ion-back-button defaultHref="/search-location"></ion-back-button>
+        </ion-buttons>
+      </div>
+    </ion-card>
   </div>
 </ion-content>

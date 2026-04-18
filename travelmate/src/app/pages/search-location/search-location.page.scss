@@ -1,27 +1,28 @@
-$primary: #b89c85;
-$primary-deep: #a88a72;
-$primary-soft: #d5c3b4;
-$accent: #f7f1eb;
+$primary: #a38b76;
+$primary-deep: #8f7865;
+$primary-soft: rgba(163, 139, 118, 0.12);
+$accent: #f6f2ee;
 
-$bg-top: #fffefe;
-$bg-bottom: #f8f4ef;
+$bg-top: #fbfbfd;
+$bg-bottom: #f2f2f7;
 
-$surface: rgba(255, 255, 255, 0.72);
-$surface-strong: rgba(255, 255, 255, 0.86);
-$surface-elevated: rgba(255, 255, 255, 0.92);
+$surface: rgba(255, 255, 255, 0.68);
+$surface-strong: rgba(255, 255, 255, 0.8);
+$surface-elevated: rgba(255, 255, 255, 0.9);
 
 $border-soft: rgba(255, 255, 255, 0.72);
-$border-accent: rgba(184, 156, 133, 0.12);
+$border-light: rgba(60, 60, 67, 0.08);
+$border-accent: rgba(163, 139, 118, 0.14);
 
-$text-dark: #1a1a1a;
-$text-muted: #7a7a7a;
-$text-soft: #9a938d;
+$text-dark: #111111;
+$text-muted: #6e6e73;
+$text-soft: #8e8e93;
 
-$shadow-xs: 0 4px 12px rgba(17, 17, 17, 0.04);
-$shadow-sm: 0 10px 24px rgba(17, 17, 17, 0.05);
-$shadow-md: 0 16px 40px rgba(17, 17, 17, 0.08);
-$shadow-lg: 0 22px 50px rgba(17, 17, 17, 0.1);
-$shadow-fab: 0 18px 38px rgba(184, 156, 133, 0.24);
+$shadow-xs: 0 2px 8px rgba(17, 17, 17, 0.04);
+$shadow-sm: 0 8px 24px rgba(17, 17, 17, 0.06);
+$shadow-md: 0 14px 34px rgba(17, 17, 17, 0.08);
+$shadow-lg: 0 20px 48px rgba(17, 17, 17, 0.1);
+$shadow-fab: 0 12px 28px rgba(17, 17, 17, 0.14);
 
 $radius-sm: 16px;
 $radius-md: 20px;
@@ -35,20 +36,19 @@ ion-content.no-scroll {
   --overflow: hidden;
   --background: transparent;
   background:
-    radial-gradient(circle at 0% 0%, rgba(184, 156, 133, 0.09), transparent 24%),
-    radial-gradient(circle at 100% 0%, rgba(184, 156, 133, 0.05), transparent 18%),
+    radial-gradient(circle at top, rgba(255, 255, 255, 0.95), transparent 34%),
     linear-gradient(180deg, $bg-top 0%, $bg-bottom 100%);
   position: relative;
   contain: layout size style;
 }
 
-/* subtle ambient glow */
 ion-content.no-scroll::before {
   content: '';
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(circle at 50% 15%, rgba(255, 255, 255, 0.35), transparent 30%);
+    radial-gradient(circle at 20% 0%, rgba(255, 255, 255, 0.7), transparent 28%),
+    radial-gradient(circle at 100% 10%, rgba(255, 255, 255, 0.35), transparent 20%);
   pointer-events: none;
   z-index: 0;
 }
@@ -60,25 +60,24 @@ ion-content.no-scroll::before {
   height: 71vh;
   width: 100%;
   max-width: 92%;
-  margin: 1rem auto 1.3rem auto;
+  margin: 1rem auto 1.25rem;
   overflow: hidden;
   border-radius: $radius-xl;
   background: $surface-strong;
   border: 1px solid $border-soft;
   box-shadow: $shadow-lg;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
 }
 
-/* optional premium top sheen */
 .styled-map::after {
   content: '';
   position: absolute;
   inset: 0 0 auto 0;
-  height: 90px;
+  height: 88px;
   background: linear-gradient(
     180deg,
-    rgba(255, 255, 255, 0.22) 0%,
+    rgba(255, 255, 255, 0.24) 0%,
     rgba(255, 255, 255, 0) 100%
   );
   pointer-events: none;
@@ -89,24 +88,24 @@ ion-content.no-scroll::before {
 .location-search-form {
   position: relative;
   z-index: 3;
-  padding: 0 16px;
-  margin: 0 auto 1rem auto;
   max-width: 92%;
+  margin: 0 auto 1rem;
+  padding: 0 16px;
 }
 
 .search-bar-container {
+  position: relative;
   display: flex;
   align-items: center;
   gap: 12px;
   padding: 12px 16px;
   border-radius: $radius-pill;
   background: $surface;
-  border: 1px solid rgba(255, 255, 255, 0.82);
+  border: 1px solid rgba(255, 255, 255, 0.78);
   box-shadow: $shadow-md;
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   transition: $transition;
-  position: relative;
 }
 
 .search-bar-container::before {
@@ -116,36 +115,35 @@ ion-content.no-scroll::before {
   border-radius: inherit;
   background: linear-gradient(
     180deg,
-    rgba(255, 255, 255, 0.18) 0%,
+    rgba(255, 255, 255, 0.22) 0%,
     rgba(255, 255, 255, 0) 100%
   );
   pointer-events: none;
 }
 
 .search-bar-container:focus-within {
-  transform: translateY(-1px);
-  border: 1px solid rgba(184, 156, 133, 0.18);
+  border-color: $border-accent;
   box-shadow:
-    0 16px 34px rgba(17, 17, 17, 0.08),
-    0 0 0 4px rgba(184, 156, 133, 0.08);
+    0 14px 30px rgba(17, 17, 17, 0.08),
+    0 0 0 4px rgba(163, 139, 118, 0.08);
 }
 
 .search-icon {
-  color: $primary;
-  font-size: 19px;
-  opacity: 0.95;
   flex-shrink: 0;
+  font-size: 18px;
+  color: $text-soft;
+  opacity: 1;
 }
 
 .search-input {
   flex: 1;
   min-width: 0;
   border: none;
-  background: transparent;
   outline: none;
+  background: transparent;
+  color: $text-dark;
   font-size: 0.98rem;
   font-weight: 500;
-  color: $text-dark;
   letter-spacing: -0.01em;
 }
 
@@ -155,32 +153,24 @@ ion-content.no-scroll::before {
 
 .search-button {
   flex-shrink: 0;
-  border: none;
-  cursor: pointer;
-  border-radius: $radius-pill;
   padding: 9px 15px;
-  font-size: 0.84rem;
-  font-weight: 700;
-  letter-spacing: -0.01em;
+  border: none;
+  border-radius: $radius-pill;
+  cursor: pointer;
   white-space: nowrap;
-  color: white;
-  background: linear-gradient(
-    135deg,
-    lighten($primary, 7%) 0%,
-    $primary 100%
-  );
-  box-shadow: 0 10px 20px rgba(184, 156, 133, 0.18);
+  background: rgba(17, 17, 17, 0.92);
+  color: #ffffff;
+  font-size: 0.83rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  box-shadow: 0 8px 18px rgba(17, 17, 17, 0.14);
   transition: $transition;
 }
 
 .search-button:hover {
   transform: translateY(-1px);
-  background: linear-gradient(
-    135deg,
-    lighten($primary, 9%) 0%,
-    $primary-deep 100%
-  );
-  box-shadow: 0 14px 26px rgba(184, 156, 133, 0.22);
+  background: #000000;
+  box-shadow: 0 12px 22px rgba(17, 17, 17, 0.16);
 }
 
 .search-button:active {
@@ -189,35 +179,31 @@ ion-content.no-scroll::before {
 
 /* FAB */
 .add-fab {
-  bottom: 26px;
   right: 22px;
+  bottom: 26px;
   z-index: 10;
 }
 
 .add-fab ion-fab-button {
-  --background: transparent;
+  --background: rgba(255, 255, 255, 0.82);
+  --color: #111111;
   --border-radius: 50%;
   --box-shadow: none;
 
-  width: 58px;
-  height: 58px;
-  border: none;
-  border-radius: 50%;
-  background: linear-gradient(
-    135deg,
-    lighten($primary, 8%) 0%,
-    $primary 100%
-  );
-  box-shadow: $shadow-fab;
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  transition: transform 0.22s ease, box-shadow 0.22s ease, background 0.22s ease;
-  animation: pulseGlow 2.8s ease-in-out infinite;
-  position: relative;
+  width: 58px;
+  height: 58px;
   overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.74);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.76);
+  box-shadow: $shadow-fab;
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  transition: $transition;
 }
 
 .add-fab ion-fab-button::before {
@@ -226,70 +212,41 @@ ion-content.no-scroll::before {
   inset: 0;
   background: linear-gradient(
     180deg,
-    rgba(255, 255, 255, 0.22) 0%,
+    rgba(255, 255, 255, 0.3) 0%,
     rgba(255, 255, 255, 0) 100%
   );
   pointer-events: none;
 }
 
 .add-fab ion-fab-button:hover {
-  transform: translateY(-1px) scale(1.06);
-  box-shadow: 0 22px 40px rgba(184, 156, 133, 0.28);
-  background: linear-gradient(
-    135deg,
-    lighten($primary, 10%) 0%,
-    lighten($primary, 1%) 100%
-  );
+  transform: translateY(-1px) scale(1.03);
+  box-shadow: 0 16px 34px rgba(17, 17, 17, 0.16);
 }
 
 .add-fab ion-fab-button:active {
-  transform: scale(0.95);
-  box-shadow: 0 10px 18px rgba(184, 156, 133, 0.16);
+  transform: scale(0.96);
 }
 
 .add-fab ion-fab-button ion-icon {
   font-size: 24px;
-  color: white;
-}
-
-/* FAB pulse */
-@keyframes pulseGlow {
-  0% {
-    box-shadow:
-      0 0 0 0 rgba(184, 156, 133, 0.16),
-      0 10px 22px rgba(184, 156, 133, 0.16);
-  }
-  70% {
-    box-shadow:
-      0 0 0 12px rgba(184, 156, 133, 0),
-      0 10px 22px rgba(184, 156, 133, 0.16);
-  }
-  100% {
-    box-shadow:
-      0 0 0 0 rgba(184, 156, 133, 0),
-      0 10px 22px rgba(184, 156, 133, 0.16);
-  }
+  color: $text-dark;
 }
 
 /* BACK BAR */
 .back-button-bar {
-  height: 58px;
-  padding: 10px 16px;
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-radius: 0 0 $radius-md $radius-md;
-  background: linear-gradient(
-    135deg,
-    rgba(207, 188, 171, 0.95) 0%,
-    rgba(184, 156, 133, 0.92) 100%
-  );
-  box-shadow: 0 12px 24px rgba(184, 156, 133, 0.14);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.28);
-  position: relative;
+  height: 58px;
+  padding: 10px 16px;
   overflow: hidden;
+  border-radius: 0 0 $radius-md $radius-md;
+  background: rgba(255, 255, 255, 0.78);
+  border-top: 1px solid $border-light;
+  box-shadow: 0 -8px 20px rgba(17, 17, 17, 0.04);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
 }
 
 .back-button-bar::before {
@@ -298,39 +255,38 @@ ion-content.no-scroll::before {
   inset: 0;
   background: linear-gradient(
     180deg,
-    rgba(255, 255, 255, 0.14) 0%,
+    rgba(255, 255, 255, 0.2) 0%,
     rgba(255, 255, 255, 0) 100%
   );
   pointer-events: none;
 }
 
 .back-button-bar .back-title {
-  color: white;
-  font-size: 0.98rem;
-  font-weight: 600;
   margin-left: 8px;
+  color: $text-dark;
+  font-size: 0.96rem;
+  font-weight: 600;
   letter-spacing: -0.01em;
 }
 
-/* GOOGLE AUTOCOMPLETE */
 .pac-container {
   z-index: 9999 !important;
   max-height: 250px !important;
   overflow-y: auto !important;
   margin-top: 8px !important;
   border-radius: $radius-md !important;
+  border: 1px solid rgba(255, 255, 255, 0.74) !important;
+  background: rgba(255, 255, 255, 0.92) !important;
   box-shadow: 0 18px 34px rgba(17, 17, 17, 0.1) !important;
-  border: 1px solid $border-accent !important;
-  background: rgba(255, 255, 255, 0.96) !important;
-  backdrop-filter: blur(14px) !important;
-  -webkit-backdrop-filter: blur(14px) !important;
+  backdrop-filter: blur(18px) !important;
+  -webkit-backdrop-filter: blur(18px) !important;
 }
 
 .pac-item {
   padding: 11px 14px !important;
-  font-size: 0.92rem !important;
+  border-top: 1px solid rgba(60, 60, 67, 0.06) !important;
   color: $text-dark !important;
-  border-top: 1px solid rgba(184, 156, 133, 0.06) !important;
+  font-size: 0.92rem !important;
 }
 
 .pac-item:first-child {
@@ -338,16 +294,15 @@ ion-content.no-scroll::before {
 }
 
 .pac-item:hover {
-  background: rgba(184, 156, 133, 0.07) !important;
+  background: rgba(163, 139, 118, 0.06) !important;
 }
 
-/* tiny polish on scrollbars */
 .pac-container::-webkit-scrollbar {
   width: 8px;
 }
 
 .pac-container::-webkit-scrollbar-thumb {
-  background: rgba(184, 156, 133, 0.24);
+  background: rgba(60, 60, 67, 0.18);
   border-radius: 999px;
 }
 
@@ -356,18 +311,18 @@ ion-content.no-scroll::before {
   .styled-map {
     height: 66vh;
     max-width: 94%;
+    margin: 0.85rem auto 1rem;
     border-radius: 24px;
-    margin: 0.85rem auto 1rem auto;
   }
 
   .location-search-form {
-    padding: 0 12px;
     max-width: 94%;
+    padding: 0 12px;
   }
 
   .search-bar-container {
-    padding: 11px 14px;
     gap: 10px;
+    padding: 11px 14px;
   }
 
   .search-input {
@@ -380,8 +335,8 @@ ion-content.no-scroll::before {
   }
 
   .add-fab {
-    bottom: 22px;
     right: 18px;
+    bottom: 22px;
   }
 
   .add-fab ion-fab-button {
