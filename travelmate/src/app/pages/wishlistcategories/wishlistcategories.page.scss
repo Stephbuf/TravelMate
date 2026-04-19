@@ -1,179 +1,54 @@
+$primary: #a38b76;
+$primary-deep: #8f7865;
+$primary-soft: rgba(163, 139, 118, 0.12);
+$accent: #f6f2ee;
 
+$bg-top: #fbfbfd;
+$bg-bottom: #f2f2f7;
 
-$text-color: #ffffff;
-$glass-bg: rgba(255, 255, 255, 0.65);
-$border-radius: 24px;
-$radius: 20px;
+$surface: rgba(255, 255, 255, 0.68);
+$surface-strong: rgba(255, 255, 255, 0.8);
+$surface-elevated: rgba(255, 255, 255, 0.9);
 
+$border-soft: rgba(255, 255, 255, 0.72);
+$border-light: rgba(60, 60, 67, 0.08);
+$border-accent: rgba(163, 139, 118, 0.14);
+
+$text-dark: #111111;
+$text-muted: #6e6e73;
+$text-soft: #8e8e93;
+$text-light: #ffffff;
+
+$shadow-xs: 0 2px 8px rgba(17, 17, 17, 0.04);
+$shadow-sm: 0 8px 24px rgba(17, 17, 17, 0.06);
+$shadow-md: 0 14px 34px rgba(17, 17, 17, 0.08);
+$shadow-lg: 0 20px 48px rgba(17, 17, 17, 0.1);
+
+$radius-sm: 16px;
+$radius-md: 20px;
+$radius-lg: 24px;
+$radius-xl: 30px;
+$radius-pill: 999px;
+
+$transition: all 0.28s cubic-bezier(0.22, 1, 0.36, 1);
 
 * {
   -webkit-tap-highlight-color: transparent;
 }
 
-ion-item::part(native), ion-button::part(native) {
+ion-item::part(native),
+ion-button::part(native) {
   background-color: transparent !important;
   box-shadow: none !important;
 }
 
-ion-item, ion-button {
+ion-item,
+ion-button {
   --background-focused: transparent;
   --background-hover: transparent;
   --box-shadow: none;
 }
 
-.wishlist-categories-content {
-  font-family: 'Segoe UI', sans-serif;
- 
-  padding: 1rem 1rem 4rem;
-  min-height: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-}
-
-.beautiful-header {
-  text-align: center;
-  padding: .8rem 1rem 1.5rem;
-  position: relative;
-  margin-bottom: 2.5rem;
-
-  &::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background-image: url('/assets/images/GoogleMapTA.webp');
-    background-size: cover;
-    background-position: center;
-    opacity: 0.25;
-    filter: blur(3px);
-    z-index: -1;
-  }
-
-  h1 {
-    font-size: 2.3rem;
-    font-weight: 200;
-    color: #8e7563;
-    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.07);
-  }
-}
-
-.wrapper {
-  padding: 0 1rem;
-}
-
-.carousel {
-  display: flex;
-  flex-direction: column;
-  gap: 1.8rem;
-}
-
-.carousel__item {
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: $border-radius;
-  padding: 1.5rem;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  display: flex;
-  align-items: flex-start;
-  gap: 1rem;
-  animation: fadeInUp 0.4s ease both;
-
-  &-head {
-
-   background: #f4f1eabd;
-    border-radius: 50%;
-    width: 64px;
-    height: 64px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 30px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s ease;
-  }
-
-  &-body {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-  }
-}
-
-.category-toggle {
-  background: transparent;
-  border-radius: 999px;
-  --background: transparent;
-  --ion-color-base: transparent;
-  --color: #8e7563;
-  --padding-start: 0;
-  padding-left: 0;
-  font-size: 1.1rem;
-
-  .category-name {
-    font-weight: 600;
-  }
-
-}
-
-.place-item {
-
-  border-radius: $radius;
-  margin-top: 1rem;
-  padding: 0.5rem;
-      &:hover {
-    background: rgba(240, 235, 235, 0.596) !important; 
-    box-shadow: 0 4px 10px rgba(139, 125, 128, 0.26);
-      }
-  .place-label {
-    font-size: 1rem;
-    font-weight: 500;
-    color: #b59e8c ;
-  }
-}
-
-
-.back-button-bar {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  background: #23a29b;
-  color: white;
-  padding: 12px 20px;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  border-radius: 18px 18px 0 0;
-  box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.05);
-  z-index: 10;
-
-  ion-back-button {
-    --color: white !important;
-
-    ion-icon {
-      color: white !important;
-    }
-  }
-}
-
-.back-button-bar {
-  background-color:#23a29b;
-  padding: 10px 16px;
-  height: 50px;
-  display: flex;
-  align-items: center;
-  border-radius: 0 0 12px 12px;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
-  justify-content: space-between;
-
-  .back-title {
-    color: white;
-    font-size: 1rem;
-    font-weight: 500;
-    margin-left: 8px;
-  }
-}
 ion-item::part(native),
 ion-button::part(native) {
   background-color: transparent !important;
@@ -187,6 +62,160 @@ ion-button::part(native) {
   --highlight-color-focused: transparent !important;
 }
 
+.wishlist-categories-content {
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', sans-serif;
+  min-height: 100%;
+  padding: 1rem 1rem 5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.35rem;
+  background:
+    radial-gradient(circle at top, rgba(255, 255, 255, 0.95), transparent 34%),
+    linear-gradient(180deg, $bg-top 0%, $bg-bottom 100%);
+  color: $text-dark;
+}
+
+.beautiful-header {
+  position: relative;
+  margin-bottom: 1rem;
+  padding: 1rem 1rem 1.1rem;
+  text-align: center;
+  overflow: hidden;
+  border-radius: $radius-xl;
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid rgba(255, 255, 255, 0.72);
+  box-shadow: $shadow-sm;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url('/assets/images/GoogleMapTA.webp');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.1;
+    filter: blur(8px) saturate(0.9);
+    transform: scale(1.04);
+    z-index: 0;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.28) 0%,
+      rgba(255, 255, 255, 0.08) 100%
+    );
+    z-index: 0;
+  }
+
+  h1 {
+    position: relative;
+    z-index: 1;
+    margin: 0;
+    font-size: 1.9rem;
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    color: $primary;
+  }
+}
+
+.wrapper {
+  padding: 0 0.1rem;
+}
+
+.carousel {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.carousel__item {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.95rem;
+  padding: 1.1rem;
+  border-radius: $radius-lg;
+  background: $surface;
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid $border-soft;
+  box-shadow: $shadow-sm;
+  animation: fadeInUp 0.4s ease both;
+  transition: $transition;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: $shadow-md;
+  }
+
+  &-head {
+    flex-shrink: 0;
+    width: 58px;
+    height: 58px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 27px;
+    background: rgba(255, 255, 255, 0.82);
+    border: 1px solid rgba(255, 255, 255, 0.88);
+    box-shadow: $shadow-xs;
+  }
+
+  &-body {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.category-toggle {
+  --background: transparent;
+  --ion-color-base: transparent;
+  --color: #{$primary};
+  --padding-start: 0;
+  padding-left: 0;
+  border-radius: $radius-pill;
+  background: transparent;
+  font-size: 1rem;
+
+  .category-name {
+    font-weight: 700;
+    letter-spacing: -0.015em;
+    color: $primary;
+  }
+}
+
+.place-item {
+  margin-top: 0.8rem;
+  padding: 0.78rem 0.9rem;
+  border-radius: $radius-md;
+  background: rgba(255, 255, 255, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.58);
+  box-shadow: 0 4px 14px rgba(17, 17, 17, 0.04);
+  transition: $transition;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.7) !important;
+    box-shadow: 0 10px 18px rgba(17, 17, 17, 0.08);
+    transform: translateY(-1px);
+  }
+
+  .place-label {
+    font-size: 0.97rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: $primary;
+  }
+}
+
 .timeline-wrapper {
   position: relative;
   padding-left: 30px;
@@ -194,25 +223,90 @@ ion-button::part(native) {
   &::before {
     content: '';
     position: absolute;
-    top: 0;
-    left: 16px;
+    top: 8px;
+    bottom: 8px;
+    left: 14px;
     width: 2px;
-    height: 100%;
-    background: #cbb9a4;
+    border-radius: 999px;
+    background: linear-gradient(
+      180deg,
+      rgba(203, 185, 164, 0.16) 0%,
+      rgba(203, 185, 164, 0.8) 28%,
+      rgba(203, 185, 164, 0.26) 100%
+    );
     z-index: 0;
   }
 
   .timeline-dot {
     position: absolute;
-    top: 24px;
-    left: 10px;
+    top: 22px;
+    left: 7px;
     width: 15px;
     height: 15px;
-    background-color: #e3d5ca; 
+    background: linear-gradient(180deg, #efe4d9 0%, #dec8b5 100%);
+    border: 2px solid rgba(255, 255, 255, 0.92);
     border-radius: 50%;
+    box-shadow: 0 4px 10px rgba(142, 117, 99, 0.16);
     z-index: 1;
-
   }
 }
 
+.back-button-bar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 58px;
+  padding: 10px 16px;
+  overflow: hidden;
+  border-radius: 0 0 $radius-md $radius-md;
+  background: rgba(255, 255, 255, 0.78);
+  border-top: 1px solid $border-light;
+  box-shadow: 0 -8px 20px rgba(17, 17, 17, 0.04);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
 
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.2) 0%,
+      rgba(255, 255, 255, 0) 100%
+    );
+    pointer-events: none;
+  }
+
+  ion-back-button {
+    --color: #ffffff !important;
+    color: #ffffff !important;
+
+    ion-icon {
+      color: #ffffff !important;
+    }
+  }
+
+  .back-title {
+    margin-left: 8px;
+    color: #ffffff;
+    font-size: 0.96rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

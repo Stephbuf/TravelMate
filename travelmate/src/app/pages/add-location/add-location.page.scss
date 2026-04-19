@@ -250,6 +250,10 @@ ion-input::part(native) {
   overflow: hidden;
 }
 
+.select-like-popover {
+  --offset-y: -14px;
+}
+
 .select-like-popover ion-item,
 .action-popover ion-item {
   --background: transparent;

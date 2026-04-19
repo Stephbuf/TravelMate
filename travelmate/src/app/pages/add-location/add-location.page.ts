@@ -48,6 +48,7 @@ import { ToastController } from '@ionic/angular';
 })
 export class AddLocationPage implements OnInit {
   locationForm!: FormGroup;
+  selectedPlaceId = '';
 
   categories: { [key: string]: string } = {
     'Restaurant': '🍽️',
@@ -85,6 +86,9 @@ export class AddLocationPage implements OnInit {
     const address = parsed.address || '';
     const city = parsed.city || '';
     const country = parsed.country || '';
+    const locationName = parsed.name || '';
+
+    this.selectedPlaceId = parsed.placeId || '';
 
     this.locationForm = this.fb.group({
       country: [country, Validators.required],
@@ -92,7 +96,7 @@ export class AddLocationPage implements OnInit {
       address: [address, Validators.required],
       category: ['', Validators.required],
       tag: ['wishlist', Validators.required],
-      location_name: ['', Validators.required]
+      location_name: [locationName, Validators.required]
     });
   }
 
@@ -135,7 +139,8 @@ export class AddLocationPage implements OnInit {
       tag,
       wishlist: tag === 'wishlist',
       location_name: location_name.trim(),
-      userEmail: localStorage.getItem('email')
+      userEmail: localStorage.getItem('email'),
+      place_id: this.selectedPlaceId || null
     };
 
     console.log('🚀 Payload being sent:', payload);

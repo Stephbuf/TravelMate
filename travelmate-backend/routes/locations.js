@@ -3,16 +3,20 @@ const router = express.Router();
 const { Sequelize } = require('sequelize');
 const Location = require('../models/location');
 
-// ✅ Move country from wishlist to itinerary or from itinerary to wishlist
+// Move country from wishlist to itinerary or from itinerary to wishlist
 router.put('/move-country', async (req, res) => {
   const { email, country, currentTag } = req.body;
 
   try {
+    const normalizedEmail = email?.trim();
+    const normalizedCountry = country?.trim();
+    const normalizedCurrentTag = currentTag?.trim();
+
     const existingLocation = await Location.findOne({
       where: {
-        userEmail: email,
-        country,
-        tag: currentTag,
+        userEmail: normalizedEmail,
+        country: normalizedCountry,
+        tag: normalizedCurrentTag
       }
     });
 
@@ -20,21 +24,27 @@ router.put('/move-country', async (req, res) => {
       return res.status(404).json({ message: 'Location not found in the specified category.' });
     }
 
-    const newTag = currentTag === 'wishlist' ? 'itinerary' : 'wishlist';
+    const newTag = normalizedCurrentTag === 'wishlist' ? 'itinerary' : 'wishlist';
 
     await Location.update(
       { tag: newTag },
-      { where: { userEmail: email, country, tag: currentTag } }
+      {
+        where: {
+          userEmail: normalizedEmail,
+          country: normalizedCountry,
+          tag: normalizedCurrentTag
+        }
+      }
     );
 
-    res.status(200).json({ message: `${country} moved to ${newTag}` });
+    res.status(200).json({ message: `${normalizedCountry} moved to ${newTag}` });
   } catch (err) {
     console.error('Error moving country:', err);
     res.status(500).json({ message: 'Failed to move country', error: err.message });
   }
 });
 
-// ✅ Create new location
+// Create new location
 router.post('/', async (req, res) => {
   try {
     const {
@@ -49,29 +59,51 @@ router.post('/', async (req, res) => {
       tag
     } = req.body;
 
-    const existingLocation = await Location.findOne({
-      where: {
-        userEmail,
-        city,
-        location_name,
-        tag
-      }
-    });
+    const normalizedCountry = country?.trim();
+    const normalizedCity = city?.trim();
+    const normalizedCategory = category?.trim();
+    const normalizedLocationName = location_name?.trim();
+    const normalizedAddress = address?.trim();
+    const normalizedUserEmail = userEmail?.trim();
+    const normalizedTag = tag?.trim();
+    const normalizedPlaceId = place_id?.trim();
+
+    let existingLocation = null;
+
+    if (normalizedPlaceId) {
+      existingLocation = await Location.findOne({
+        where: {
+          userEmail: normalizedUserEmail,
+          tag: normalizedTag,
+          place_id: normalizedPlaceId
+        }
+      });
+    } else {
+      existingLocation = await Location.findOne({
+        where: {
+          userEmail: normalizedUserEmail,
+          tag: normalizedTag,
+          country: normalizedCountry,
+          city: normalizedCity,
+          location_name: normalizedLocationName
+        }
+      });
+    }
 
     if (existingLocation) {
       return res.status(400).json({ message: 'You’ve already added this place to your list.' });
     }
 
     const newLocation = await Location.create({
-      country,
-      city,
-      category,
-      location_name,
-      address,
-      userEmail,
+      country: normalizedCountry,
+      city: normalizedCity,
+      category: normalizedCategory,
+      location_name: normalizedLocationName,
+      address: normalizedAddress,
+      userEmail: normalizedUserEmail,
       wishlist,
-      place_id,
-      tag
+      place_id: normalizedPlaceId || null,
+      tag: normalizedTag
     });
 
     res.status(201).json(newLocation);
@@ -85,7 +117,7 @@ router.post('/', async (req, res) => {
 router.get('/countries', async (req, res) => {
   try {
     const countries = await Location.findAll({
-      attributes: [[Sequelize.fn('DISTINCT', Sequelize.col('country')), 'country']],
+      attributes: [[Sequelize.fn('DISTINCT', Sequelize.col('country')), 'country']]
     });
     res.status(200).json(countries.map((c) => c.country));
   } catch (err) {
@@ -99,8 +131,8 @@ router.get('/user/:userEmail', async (req, res) => {
     const { userEmail } = req.params;
     const { tag } = req.query;
 
-    const whereClause = { userEmail };
-    if (tag) whereClause.tag = tag;
+    const whereClause = { userEmail: userEmail?.trim() };
+    if (tag) whereClause.tag = tag.trim();
 
     const entries = await Location.findAll({ where: whereClause });
     res.status(200).json(entries);
@@ -132,18 +164,20 @@ router.put('/:id', async (req, res) => {
       userEmail,
       location_name,
       wishlist,
+      tag
     } = req.body;
 
     const [updated] = await Location.update(
       {
-        country,
-        city,
-        category,
-        address,
-        place_id,
-        userEmail,
-        location_name,
+        country: country?.trim(),
+        city: city?.trim(),
+        category: category?.trim(),
+        address: address?.trim(),
+        place_id: place_id?.trim() || null,
+        userEmail: userEmail?.trim(),
+        location_name: location_name?.trim(),
         wishlist,
+        tag: tag?.trim()
       },
       { where: { id: req.params.id } }
     );
@@ -155,7 +189,7 @@ router.put('/:id', async (req, res) => {
   }
 });
 
-// Edit city or country name
+// Edit city or country name (updates all matching rows for that user)
 router.put('/editLocation/:type/:name', async (req, res) => {
   try {
     const { newName, userEmail } = req.body;
@@ -165,27 +199,43 @@ router.put('/editLocation/:type/:name', async (req, res) => {
       return res.status(400).json({ message: 'Missing required fields: newName or userEmail' });
     }
 
-    const decodedName = decodeURIComponent(name);
+    const decodedName = decodeURIComponent(name).trim();
+    const normalizedNewName = newName.trim();
+    const normalizedUserEmail = userEmail.trim();
 
-    let location = null;
+    let updateResult;
+
     if (type === 'city') {
-      location = await Location.findOne({ where: { city: decodedName, userEmail } });
+      updateResult = await Location.update(
+        { city: normalizedNewName },
+        {
+          where: {
+            city: decodedName,
+            userEmail: normalizedUserEmail
+          }
+        }
+      );
     } else if (type === 'country') {
-      location = await Location.findOne({ where: { country: decodedName, userEmail } });
+      updateResult = await Location.update(
+        { country: normalizedNewName },
+        {
+          where: {
+            country: decodedName,
+            userEmail: normalizedUserEmail
+          }
+        }
+      );
+    } else {
+      return res.status(400).json({ message: 'Invalid type. Must be city or country.' });
     }
 
-    if (!location) {
+    const [updatedCount] = updateResult;
+
+    if (!updatedCount) {
       return res.status(404).json({ message: 'Location not found' });
     }
 
-    if (type === 'city') {
-      location.city = newName;
-    } else {
-      location.country = newName;
-    }
-
-    await location.save();
-    res.status(200).json({ message: `${type} updated successfully`, location });
+    res.status(200).json({ message: `${type} updated successfully`, updatedCount });
   } catch (err) {
     res.status(500).json({ message: 'Error updating location', error: err.message });
   }
@@ -201,17 +251,20 @@ router.put('/editLocation/place/:name', async (req, res) => {
       return res.status(400).json({ message: 'Missing required fields: newName or userEmail' });
     }
 
-    const decodedName = decodeURIComponent(name);
+    const decodedName = decodeURIComponent(name).trim();
 
     const location = await Location.findOne({
-      where: { location_name: decodedName, userEmail }
+      where: {
+        location_name: decodedName,
+        userEmail: userEmail.trim()
+      }
     });
 
     if (!location) {
       return res.status(404).json({ message: 'Place not found' });
     }
 
-    location.location_name = newName;
+    location.location_name = newName.trim();
 
     await location.save();
 
@@ -238,11 +291,23 @@ router.delete('/:id', async (req, res) => {
   }
 });
 
-// Delete city
+// Delete city scoped by user
 router.delete('/city/:city', async (req, res) => {
   const { city } = req.params;
+  const { userEmail } = req.query;
+
   try {
-    const deleted = await Location.destroy({ where: { city } });
+    if (!userEmail) {
+      return res.status(400).json({ message: 'userEmail is required' });
+    }
+
+    const deleted = await Location.destroy({
+      where: {
+        city: city.trim(),
+        userEmail: userEmail.trim()
+      }
+    });
+
     if (!deleted) return res.status(404).json({ message: 'City not found' });
     res.status(200).json({ message: 'City deleted successfully' });
   } catch (err) {
@@ -250,11 +315,23 @@ router.delete('/city/:city', async (req, res) => {
   }
 });
 
-// Delete country
+// Delete country scoped by user
 router.delete('/country/:country', async (req, res) => {
   const { country } = req.params;
+  const { userEmail } = req.query;
+
   try {
-    const deleted = await Location.destroy({ where: { country } });
+    if (!userEmail) {
+      return res.status(400).json({ message: 'userEmail is required' });
+    }
+
+    const deleted = await Location.destroy({
+      where: {
+        country: country.trim(),
+        userEmail: userEmail.trim()
+      }
+    });
+
     if (!deleted) return res.status(404).json({ message: 'Country not found' });
     res.status(200).json({ message: 'Country deleted successfully' });
   } catch (err) {
