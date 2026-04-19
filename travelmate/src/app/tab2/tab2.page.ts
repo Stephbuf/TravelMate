@@ -30,22 +30,55 @@ export class Tab2Page implements OnInit {
     this.fetchData();
   }
 
+
+
+  resetAndFetchData() {
+    this.allData = [];
+    this.wishlistData = [];
+    this.expandedCountry = null;
+    this.fetchData();
+  }
+
   toggleView() {
     this.isWishlist = !this.isWishlist;
     this.setFilter(this.isWishlist ? 'wishlist' : 'itinerary');
   }
-
-  openMenu() {
-    this.menuCtrl.open('mainMenu');
+  ionViewWillEnter() {
+    this.menuCtrl.enable(false, 'mainMenu');
+    this.menuCtrl.close('mainMenu');
+    this.resetAndFetchData();
   }
 
+  ionViewDidEnter() {
+    this.menuCtrl.enable(true, 'mainMenu');
+  }
+
+  openMenu() {
+    this.menuCtrl.enable(true, 'mainMenu');
+    this.menuCtrl.open('mainMenu');
+  }
   fetchData() {
     const userEmail = localStorage.getItem('email');
+
+    if (!userEmail) {
+      this.allData = [];
+      this.wishlistData = [];
+      this.expandedCountry = null;
+      return;
+    }
+
     this.http
-      .get<any[]>(`http://localhost:3000/locations/user/${userEmail}?tag=${this.currentFilter}`)
-      .subscribe((data) => {
-        this.allData = data;
-        this.applyFilter();
+      .get<any[]>(`http://localhost:3000/locations/user/${encodeURIComponent(userEmail)}?tag=${this.currentFilter}`)
+      .subscribe({
+        next: (data) => {
+          this.allData = data;
+          this.applyFilter();
+        },
+        error: (err) => {
+          console.error('Error fetching locations:', err);
+          this.allData = [];
+          this.wishlistData = [];
+        }
       });
   }
 
