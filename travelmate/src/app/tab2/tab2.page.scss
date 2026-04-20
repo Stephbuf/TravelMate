@@ -148,6 +148,8 @@ ion-toolbar.toolbar-with-plane {
 }
 
 .card {
+  width: 90%;
+  margin: 0 auto;
   background: rgba(255, 255, 255, 0.82);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
@@ -193,6 +195,7 @@ ion-toolbar.toolbar-with-plane {
       opacity: 1;
     }
   }
+}
 
   .card__title {
     font-size: 1.06rem;
@@ -201,7 +204,6 @@ ion-toolbar.toolbar-with-plane {
     margin-bottom: 0.35rem;
     letter-spacing: -0.02em;
   }
-}
 
 .country-row,
 .city-row {
